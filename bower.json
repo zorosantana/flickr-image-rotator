@@ -1,0 +1,21 @@
+{
+  "name": "flickr-image-rotator",
+  "authors": [
+    "Zoro Santana"
+  ],
+  "description": "Flickr image rotator using jQuery",
+  "main": "index.html",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery-2.2.4.min": "https://code.jquery.com/jquery-2.2.4.min.js"
+  }
+}

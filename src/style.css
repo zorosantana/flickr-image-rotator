@@ -1,0 +1,14 @@
+#image-rotator {
+    height:300px;
+    width:960px;
+}
+#image-rotator div {
+    position:absolute;
+    z-index: 0;
+}
+#image-rotator div.previous {
+    z-index: 1;
+}
+#image-rotator div.current {
+    z-index: 2;
+}
