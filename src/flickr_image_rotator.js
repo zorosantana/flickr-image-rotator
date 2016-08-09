@@ -4,21 +4,8 @@
  * @author Zoro Santana
  */
 
-
-/**
- * TODO
- */
-function timerSetup() {
-    var newTimer;
-
-    this.stop = function () {
-
-    }
-
-    this.start = function () {
-
-    }
-}
+// ID value returned by setInterval()
+var setIntervalId;
 
 /**
  * Get Flickr pictures by tag names.
@@ -32,8 +19,13 @@ function getPictures(flickrTags) {
 
         // Tags have been submitted
 
+        flickrTags = $('#flickrTags').val();
+
         // Empty image container
         $('#image-rotator').empty();
+
+        // Clear interval
+        clearInterval(setIntervalId);
     }
     else {
         // Default tags
@@ -49,7 +41,7 @@ function getPictures(flickrTags) {
         flickrApiCallback);
 
     // Rotate images every 3s
-    setInterval("rotateImages()", 4000);
+    setIntervalId = setInterval("rotateImages()", 4000);
 }
 
 /**
