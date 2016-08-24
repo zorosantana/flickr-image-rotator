@@ -6,9 +6,16 @@
 	<script src="jquery.min.js"></script>
 	<script type="text/javascript" src="src/flickr_image_rotator.js"></script>
 </head>
-<body onload="getPictures()">
+<body>
 	Tags: <input id="flickrTags" type="text">
-	<input type="button" value="Ok" onclick="getPictures()">
+	<input type="button" value="Ok">
 	<div id="image-rotator"></div>
+<script>
+$(document).ready(function () {
+	'use strict';
+
+	$('#image-rotator').rotateImage();
+});
+</script>
 </body>
 </html>

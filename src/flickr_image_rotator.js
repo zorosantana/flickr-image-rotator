@@ -4,103 +4,116 @@
  * @author Zoro Santana
  */
 
-// ID value returned by setInterval()
-var setIntervalId;
+(function ($) {
+    'use strict';
+    // ID value returned by setInterval()
+    var setIntervalId;
+    var flickrTags;
 
-/**
- * Get Flickr pictures by tag names.
- *
- * @param flickrTags
- */
-function getPictures(flickrTags) {
+    $.fn.rotateImage = function () {
+        callFlickrApi();
 
-    // Get tags from input field
-    if ($('#flickrTags').val()) {
+        $('input[type=button]').click(function() {
+            callFlickrApi();
+        });
 
-        // Tags have been submitted
+        function callFlickrApi() {
+            getFlickrTags();
 
-        flickrTags = $('#flickrTags').val();
+            // Load Flickr images
+            $.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?", {
+                    tags: flickrTags,
+                    tagmode: "any",
+                    format: "json"
+                },
+                flickrApiCallback);
 
-        // Empty image container
-        $('#image-rotator').empty();
-
-        // Clear interval
-        clearInterval(setIntervalId);
-    }
-    else {
-        // Default tags
-        flickrTags = 'nature, green, meditation';
-    }
-
-    // Load Flickr images
-    $.getJSON( "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?", {
-            tags: flickrTags,
-            tagmode: "any",
-            format: "json"
-        },
-        flickrApiCallback);
-
-    // Rotate images every 3s
-    setIntervalId = setInterval("rotateImages()", 4000);
-}
-
-/**
- * Flickr API Callback.
- *
- * @param flickrResult
- */
-function flickrApiCallback(flickrResult) {
-
-    // Loop through the Flickr result items
-    $.each(flickrResult.items, function(i, item) {
-        if (i === 0) {
-            // Create div with current class
-            var imageDiv = $("<div class='current'>");
+            // Rotate images every 3s
+            setIntervalId = setInterval(rotateImages, 4000);
         }
-        else {
-            // Create div for next picture
-            imageDiv = $("<div>");
+        
+        function getFlickrTags() {
 
-            // Hide div from underneath current picture
-            imageDiv.hide();
+            // Get tags from input field
+            if ($('#flickrTags').val()) {
+
+                // Tags have been submitted
+
+                flickrTags = $('#flickrTags').val();
+
+                // Empty image container
+                $('#image-rotator').empty();
+
+                // Clear interval
+                clearInterval(setIntervalId);
+            }
+            else {
+                // Default tags
+                flickrTags = 'nature, green, meditation';
+            }
+
         }
 
-        // Append recently created div to image rotator container
-        imageDiv.appendTo("#image-rotator");
+        /**
+         * Flickr API Callback.
+         *
+         * @param flickrResult
+         */
+        function flickrApiCallback(flickrResult) {
 
-        // Create and append image to new div
-        $("<img>").attr("src", item.media.m).appendTo(imageDiv);
+            // Loop through the Flickr result items
+            $.each(flickrResult.items, function (i, item) {
+                if (i === 0) {
+                    // Create div with current class
+                    var imageDiv = $("<div class='current'>");
+                }
+                else {
+                    // Create div for next picture
+                    imageDiv = $("<div>");
 
-        // Only rotating five pictures
-        if (i === 5) {
-            return false;
-        }
-    });
-}
+                    // Hide div from underneath current picture
+                    imageDiv.hide();
+                }
 
-/**
- * Rotate Flickr Images.
- */
-function rotateImages() {
-    // Get the current image
-    var currentImage = $('#image-rotator div.current');
-    // Get next image
-    var nextPhoto = currentImage.next();
+                // Append recently created div to image rotator container
+                imageDiv.appendTo("#image-rotator");
 
-    // It's the last image so start over
-    if (nextPhoto.length == 0)
-        nextPhoto = $('#image-rotator div:first');
+                // Create and append image to new div
+                $("<img>").attr("src", item.media.m).appendTo(imageDiv);
 
-    // Replace current class with previous, then hide it
-    currentImage.removeClass('current')
-        .addClass('previous')
-        .hide();
-
-    // Next photo becomes current
-    nextPhoto.css({ opacity: 0.0 })
-        .addClass('current')
-        .show()
-        .animate({opacity: 1.0 }, 1000, function() {
-                currentImage.removeClass('previous');
+                // Only rotating five pictures
+                if (i === 5) {
+                    return false;
+                }
             });
-}
+        }
+
+        /**
+         * Rotate Flickr Images.
+         */
+        function rotateImages() {
+            // Get the current image
+            var currentImage = $('#image-rotator div.current');
+            // Get next image
+            var nextPhoto = currentImage.next();
+
+            // It's the last image so start over
+            if (nextPhoto.length == 0)
+                nextPhoto = $('#image-rotator div:first');
+
+            // Replace current class with previous, then hide it
+            currentImage.removeClass('current')
+                .addClass('previous')
+                .hide();
+
+            // Next photo becomes current
+            nextPhoto.css({opacity: 0.0})
+                .addClass('current')
+                .show()
+                .animate({opacity: 1.0}, 1000, function () {
+                    currentImage.removeClass('previous');
+                });
+        }
+    };
+
+})(jQuery);
