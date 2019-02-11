@@ -1,34 +1,55 @@
-# image-viewer
-Vue.js Image Viewer Widget
+# images-viewer-vue
 
-![alt text](https://raw.githubusercontent.com/zorosantana/image-player/master/484EA4F6-DAED-4891-8182-54EC2A02D3B1.png)
+![Alt text](/media/screenshot.png "screenshot")
 
-https://jsfiddle.net/zorosantana/jd3n1g2z/
+Demo: https://xv1wkr9zzz.codesandbox.io/
 
 ## Project setup
 ```
-npm install
+npm install images-viewer-vue
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Example of Usage
 
-### Compiles and minifies for production
 ```
-npm run build
-```
+<template>
+  <ImagesViewerVue :images="images" />
+</template>
 
-### Run your tests
-```
-npm run test
-```
+<script>
+import ImagesViewerVue from "images-viewer-vue";
 
-### Lints and fixes files
+export default {
+  name: "App",
+  components: {
+    ImagesViewerVue
+  },
+  data() {
+    return {
+      images: [
+        {
+          caption: "Caption 1",
+          url: "https://loremflickr.com/320/240/cars?random=1"
+        },
+        {
+          caption: "Caption 2",
+          url: "https://loremflickr.com/320/240/cars?random=2"
+        },
+        {
+          caption: "Caption 3",
+          url: "https://loremflickr.com/320/240/cars?random=3"
+        },
+        {
+          caption: "Caption 4",
+          url: "https://loremflickr.com/320/240/cars?random=4"
+        },
+        {
+          caption: "Caption 5",
+          url: "https://loremflickr.com/320/240/cars?random=5"
+        }
+      ]
+    };
+  }
+};
+</script>
 ```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
