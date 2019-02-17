@@ -1,6 +1,6 @@
 {
   "name": "images-viewer-vue",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "",
   "main": "dist/Viewer.umd.js",
   "module": "dist/Viewer.esm.js",

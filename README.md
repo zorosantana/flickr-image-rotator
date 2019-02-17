@@ -1,6 +1,6 @@
 # images-viewer-vue
 
-![Alt text](/media/screenshot.png "screenshot")
+![Alt text](https://i.screenshot.net/qyxyphg "screenshot")
 
 Demo: https://xv1wkr9zzz.codesandbox.io/
 
@@ -8,6 +8,14 @@ Demo: https://xv1wkr9zzz.codesandbox.io/
 ```
 npm install images-viewer-vue
 ```
+
+## Config Options
+
+| Props       | Mandatory | Type    | Default |
+|-------------|-----------|---------|---------|
+| autoplay    | no        | Boolean | true    |
+| images      | yes       | Array   | -       |
+| showButtons | no        | Boolean | true    |
 
 ## Example of Usage
 

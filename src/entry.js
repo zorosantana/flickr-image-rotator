@@ -1,11 +1,11 @@
 // Import vue component
-import component from './Viewer.vue';
+import component from './App.vue';
 
 // install function executed by Vue.use()
 function install(Vue) {
   if (install.installed) return;
   install.installed = true;
-  Vue.component('Viewer', component);
+  Vue.component('App', component);
 }
 
 // Create module definition for Vue.use()
